@@ -1,0 +1,113 @@
+package bileschi.bubblebuilder;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TableRow.LayoutParams;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	@SuppressLint("NewApi")
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_main);
+
+		// Get the TableLayout
+		TableLayout tl = (TableLayout) findViewById(R.id.maintable);
+
+		int rowCount = 5;
+		// Go through each item in the array
+		for (int rowNum = 0; rowNum < rowCount; rowNum++) {
+			// Create a TableRow and give it an ID
+			TableRow tr = new TableRow(this);
+			tr.setId(100 + rowNum);
+			tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+
+			// Create a TextView to house the name of the province
+			ImageView bubble = new ImageView(this);
+			bubble.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+					R.drawable.outline));
+			bubble.setOnTouchListener(getOnTouchListener(bubble));
+			bubble.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			tr.addView(bubble);
+
+			// Create a TextView to house the value of the after-tax income
+			TextView valueTV = new TextView(this);
+			valueTV.setId(rowNum);
+			valueTV.setText("$0");
+			valueTV.setTextColor(Color.BLACK);
+			valueTV.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			tr.addView(valueTV);
+
+			// Add the TableRow to the TableLayout
+			tl.addView(tr, new TableLayout.LayoutParams(
+					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		}
+
+		// GridView gridview = (GridView) findViewById(R.id.gridview);
+		// gridview.setAdapter(new ImageAdapter(this));
+		//
+		// gridview.setOnItemClickListener(new OnItemClickListener() {
+		// @Override
+		// public void onItemClick(AdapterView<?> parent, View v,
+		// int position, long id) {
+		// Toast.makeText(MainActivity.this, "" + position,
+		// Toast.LENGTH_SHORT).show();
+		// }
+		// });
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	private final OnTouchListener getOnTouchListener(final ImageView v) {
+		return new OnTouchListener() {
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				new AlertDialog(MainActivity.this, 0);
+
+				v.setImageBitmap(BitmapFactory.decodeResource(
+						MainActivity.this.getResources(), R.drawable.red_inside));
+				return true;
+			}
+		};
+	}
+
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		// Use the Builder class for convenient dialog construction
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.app_name).setPositiveButton(
+				R.string.hello_world, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						// FIRE ZE MISSILES!
+					}
+				});
+		// Create the AlertDialog object and return it
+		return builder.create();
+	}
+
+}

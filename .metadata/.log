@@ -107,3 +107,9 @@ java.lang.IllegalArgumentException: Path for project must have only one segment.
 
 !ENTRY com.android.ide.eclipse.adt 4 0 2013-08-28 14:28:02.636
 !MESSAGE Warning: Ignoring name conflict in resource file for name activity_horizontal_margin
+
+!ENTRY org.eclipse.core.resources 4 380 2013-08-28 17:59:31.796
+!MESSAGE The resource tree is locked for modifications.
+
+!ENTRY org.eclipse.core.resources 4 380 2013-08-28 19:02:25.461
+!MESSAGE The resource tree is locked for modifications.

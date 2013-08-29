@@ -1,0 +1,106 @@
+package bileschi.bubblebuilder;
+
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		int PROVINCE_Alberta = 0;
+		int PROVINCE_BC = 1;
+		int PROVINCE_Manitoba = 2;
+		int PROVINCE_NewBrunswick = 3;
+		int PROVINCE_Newfoundland = 4;
+		int PROVINCE_Northwest = 5;
+		int PROVINCE_NovaScotia = 6;
+		int PROVINCE_Nunavut = 7;
+		int PROVINCE_Ontario = 8;
+		int PROVINCE_PEI = 9;
+		int PROVINCE_Quebec = 10;
+		int PROVINCE_Saskatchewan = 11;
+		int PROVINCE_Yukon = 12;
+
+		int numProvinces = 13;
+
+		String[] provinces = new String[numProvinces];
+		provinces[PROVINCE_Alberta] = "Alberta";
+		provinces[PROVINCE_BC] = "British Columbia";
+		provinces[PROVINCE_Manitoba] = "Manitoba";
+		provinces[PROVINCE_NewBrunswick] = "New Brunswick";
+		provinces[PROVINCE_Newfoundland] = "Newfoundland and Labrador";
+		provinces[PROVINCE_Northwest] = "Northwest Territories";
+		provinces[PROVINCE_NovaScotia] = "Nova Scotia";
+		provinces[PROVINCE_Nunavut] = "Nunavut";
+		provinces[PROVINCE_Ontario] = "Ontario";
+		provinces[PROVINCE_PEI] = "Prince Edward Island";
+		provinces[PROVINCE_Quebec] = "Quebec";
+		provinces[PROVINCE_Saskatchewan] = "Saskatchewan";
+		provinces[PROVINCE_Yukon] = "Yukon";
+
+		setContentView(R.layout.activity_main);
+
+		// Get the TableLayout
+		TableLayout tl = (TableLayout) findViewById(R.id.maintable);
+
+		int rowCount = 5;
+		// Go through each item in the array
+		for (int rowNum = 0; rowNum < rowCount; rowNum++) {
+			// Create a TableRow and give it an ID
+			TableRow tr = new TableRow(this);
+			tr.setId(100 + rowNum);
+			tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+
+			// Create a TextView to house the name of the province
+			TextView labelTV = new TextView(this);
+			labelTV.setId(200 + rowNum);
+			labelTV.setText(provinces[rowNum]);
+			labelTV.setTextColor(Color.BLACK);
+			labelTV.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			tr.addView(labelTV);
+
+			// Create a TextView to house the value of the after-tax income
+			TextView valueTV = new TextView(this);
+			valueTV.setId(rowNum);
+			valueTV.setText("$0");
+			valueTV.setTextColor(Color.BLACK);
+			valueTV.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					LayoutParams.WRAP_CONTENT));
+			tr.addView(valueTV);
+
+			// Add the TableRow to the TableLayout
+			tl.addView(tr, new TableLayout.LayoutParams(
+					LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		}
+
+		// GridView gridview = (GridView) findViewById(R.id.gridview);
+		// gridview.setAdapter(new ImageAdapter(this));
+		//
+		// gridview.setOnItemClickListener(new OnItemClickListener() {
+		// @Override
+		// public void onItemClick(AdapterView<?> parent, View v,
+		// int position, long id) {
+		// Toast.makeText(MainActivity.this, "" + position,
+		// Toast.LENGTH_SHORT).show();
+		// }
+		// });
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+}
